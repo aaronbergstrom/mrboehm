@@ -982,7 +982,7 @@ async def waitToEnd():
 def setTemplateDefaults():
     global conSupport
 #    global lcd
-    i = 0
+#    i = 0
     for console in conSupport["consoles"]:
         if console["name"] == conSupport["default"]["console"]:
             template = console["templates"][conSupport["default"]["template"]]
@@ -993,9 +993,9 @@ def setTemplateDefaults():
 #                bus.write_byte_data(defs["chip"], defs["addr"], defs["data"])
 #                print("Pot Read:", bus.read_byte_data(defs["chip"], defs["addr"]))
 #                i += 1
-            for port in template["ports"]:
+            for defBus in template["defaults"]:
                 #Changing multiplexer to console port
-                bus.write_byte(0x70, port["busAddr"])
+                bus.write_byte(0x70, defBus["bus"])
                 #Setting the default values for the 2 DAC chips and the GPIO chip
                 #
                 # GPIO - i2c address - 0x27
@@ -1011,17 +1011,25 @@ def setTemplateDefaults():
                 ###########################################################
                 # DAC1 - i2c address - 0x48
                 # DAC2 - i2c address - 0x49
-                for dac in dac_chips:
-                    #Because we are changing controller types, the first thing we
-                    #want to do is disenagage power output of the DAC so that we
-                    #don't damage the console.
-                    bus.write_i2c_block_data(dac,0x01,[0xFF,0xFF])
+                for chip in defBus["chips"]:
+                    if chip["type"] == "DAC":
+                        #Because we are changing controller types, the first thing we
+                        #want to do is disenagage power output of the DAC so that we
+                        #don't damage the console.
+                        dac = chip["addr"]
+                        bus.write_i2c_block_data(dac,0x01,[0xFF,0xFF])
                     
-                    #Set the voltage of each pin on this DAC to zero.
-                    for pin in dac_pins:
-                        bus.write_i2c_block_data(dac,pin,[0x00,0x00])
-                    #Turn the power output for this dac backon.
-                    bus.write_i2c_block_data(dac,0x01,[0x00,0x00])
+                        #Set the voltage of each pin on this DAC to zero.
+                        i=0
+                        for pin in dac_pins:
+                            qt = chip["volt"][i] // 16
+                            rm = (chip["volt"][i] % 16 * 16)
+                            bus.write_i2c_block_data(dac,pin,[qt,rm])
+                            i = i+1
+                        #Turn the power output for this dac backon.
+                        bus.write_i2c_block_data(dac,0x01,[0x00,0x00])
+                    else:
+                        print("Need to Write GPIO Default Chip Code")
                 #####################################################
                 # JDAC - Joint DAC Address for simultaneous updates #
                 #####################################################
