@@ -1,0 +1,1640 @@
+{
+    "default": {
+        "console": "stella",
+        "template": 0
+    },
+    "gamepads": [{
+            "name": "Xbox Wireless Controller",
+            "exclude": "Consumer",
+            "vendor": 1118,
+            "product": 765,
+            "version": 2307,
+            "full": "1118-765-2307",
+            "rumble": true,
+            "led": 316,
+            "events": [{
+                    "index": 0,
+                    "type": "EV_ABS",
+                    "minmax": [0, 65535],
+                    "control": "ABS_X"
+                },
+                {
+                    "index": 1,
+                    "type": "EV_ABS",
+                    "minmax": [0, 65535],
+                    "control": "ABS_Y"
+                },
+                {
+                    "index": 2,
+                    "type": "EV_ABS",
+                    "minmax": [0, 65535],
+                    "control": "ABS_Z"
+                },
+                {
+                    "index": 5,
+                    "type": "EV_ABS",
+                    "minmax": [0, 65535],
+                    "control": "ABS_RZ"
+                },
+                {
+                    "index": 9,
+                    "type": "EV_ABS",
+                    "minmax": [0, 1023],
+                    "control": "ABS_GAS"
+                },
+                {
+                    "index": 10,
+                    "type": "EV_ABS",
+                    "minmax": [0, 1023],
+                    "control": "ABS_BRAKE"
+                },
+                {
+                    "index": 16,
+                    "type": "EV_ABS",
+                    "minmax": [-1, 1],
+                    "control": "ABS_HAT0X"
+
+                },
+                {
+                    "index": 17,
+                    "type": "EV_ABS",
+                    "minmax": [-1, 1],
+                    "control": "ABS_HAT0Y"
+                },
+                {
+                    "index": 158,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "KEY_BACK"
+                },
+                {
+                    "index": 304,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_SOUTH"
+                },
+                {
+                    "index": 305,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_EAST"
+                },
+                {
+                    "index": 307,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_NORTH"
+                },
+                {
+                    "index": 308,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_WEST"
+                },
+                {
+                    "index": 310,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_TL"
+                },
+                {
+                    "index": 311,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_TR"
+                },
+                {
+                    "index": 315,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_START"
+                },
+                {
+                    "index": 316,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_MODE"
+                },
+                {
+                    "index": 317,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_THUMBL"
+                },
+                {
+                    "index": 318,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_THUMBR"
+                }
+            ]
+        },
+        {
+            "name": "Logitech Logitech Dual Action",
+            "exclude": "ignore",
+            "vendor": 1133,
+            "product": 49686,
+            "version": 272,
+            "full": "1133-49686-272",
+            "rumble": false,
+            "led": -1,
+            "events": [{
+                    "index": 0,
+                    "type": "EV_ABS",
+                    "minmax": [0, 255],
+                    "control": "ABS_X"
+                },
+                {
+                    "index": 1,
+                    "type": "EV_ABS",
+                    "minmax": [0, 255],
+                    "control": "ABS_Y"
+                },
+                {
+                    "index": 2,
+                    "type": "EV_ABS",
+                    "minmax": [0, 255],
+                    "control": "ABS_Z"
+                },
+                {
+                    "index": 5,
+                    "type": "EV_ABS",
+                    "minmax": [0, 255],
+                    "control": "ABS_RZ"
+                },
+                {
+                    "index": 16,
+                    "type": "EV_ABS",
+                    "minmax": [-1, 1],
+                    "control": "ABS_HAT0X"
+
+                },
+                {
+                    "index": 17,
+                    "type": "EV_ABS",
+                    "minmax": [-1, 1],
+                    "control": "ABS_HAT0Y"
+                },
+                {
+                    "index": 288,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_TRIGGER"
+                },
+                {
+                    "index": 289,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_THUMB"
+                },
+                {
+                    "index": 290,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_THUMB2"
+                },
+                {
+                    "index": 291,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_TOP"
+                },
+                {
+                    "index": 292,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_TOP2"
+                },
+                {
+                    "index": 293,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_PINKIE"
+                },
+                {
+                    "index": 294,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_BASE"
+                },
+                {
+                    "index": 295,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_BASE2"
+                },
+                {
+                    "index": 296,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_BASE3"
+                },
+                {
+                    "index": 297,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_BASE4"
+                },
+                {
+                    "index": 298,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_BASE5"
+                },
+                {
+                    "index": 299,
+                    "type": "EV_KEY",
+                    "minmax": [0, 1],
+                    "control": "BTN_BASE6"
+                }
+            ]
+        }
+    ],
+    "consoles": [{
+            "name": "stella",
+            "templates": [{
+                    "name": "2600 2 x Joystix\r2 x Gamepads",
+                    "defaults": [{
+                            "bus": 1,
+                            "chip": 44,
+                            "addr": 128,
+                            "data": 255
+                        },
+                        {
+                            "bus": 1,
+                            "chip": 44,
+                            "addr": 0,
+                            "data": 255
+                        },
+                        {
+                            "bus": 2,
+                            "chip": 44,
+                            "addr": 128,
+                            "data": 255
+                        },
+                        {
+                            "bus": 2,
+                            "chip": 44,
+                            "addr": 0,
+                            "data": 255
+                        }
+                    ],
+                    "ports": [{
+                            "location": "left",
+                            "busAddr": 1,
+                            "bkSwitches": 6,
+                            "events": [{
+                                    "index": {
+                                        "1118-765-2307": 17,
+                                        "1133-49686-272": 17
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0,
+                                    "inputs": ["up", "dn"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 1,
+                                        "1133-49686-272": 1
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["up", "dn"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 5,
+                                        "1133-49686-272": 5
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["up", "dn"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 16,
+                                        "1133-49686-272": 16
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 0,
+                                        "1133-49686-272": 0
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 2,
+                                        "1133-49686-272": 2
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 304,
+                                        "1133-49686-272": 288
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["f1"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 310,
+                                        "1133-49686-272": 292
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["f1"],
+                                    "player": 1
+                                }
+                            ]
+                        },
+                        {
+                            "location": "right",
+                            "busAddr": 2,
+                            "bkSwitches": 6,
+                            "events": [{
+                                    "index": {
+                                        "1118-765-2307": 17,
+                                        "1133-49686-272": 17
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0,
+                                    "inputs": ["up", "dn"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 1,
+                                        "1133-49686-272": 1
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["up", "dn"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 5,
+                                        "1133-49686-272": 5
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["up", "dn"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 16,
+                                        "1133-49686-272": 16
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 0,
+                                        "1133-49686-272": 0
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 2,
+                                        "1133-49686-272": 2
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 304,
+                                        "1133-49686-272": 288
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["f1"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 310,
+                                        "1133-49686-272": 292
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["f1"],
+                                    "player": 2
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "2600 2 x Joystix\r1 x Gamepad",
+                    "defaults": [{
+                            "bus": 1,
+                            "chip": 44,
+                            "addr": 128,
+                            "data": 255
+                        },
+                        {
+                            "bus": 1,
+                            "chip": 44,
+                            "addr": 0,
+                            "data": 255
+                        },
+                        {
+                            "bus": 2,
+                            "chip": 44,
+                            "addr": 128,
+                            "data": 255
+                        },
+                        {
+                            "bus": 2,
+                            "chip": 44,
+                            "addr": 0,
+                            "data": 255
+                        }
+                    ],
+                    "ports": [{
+                            "location": "left",
+                            "busAddr": 1,
+                            "bkSwitches": 6,
+                            "events": [{
+                                    "index": {
+                                        "1118-765-2307": 17,
+                                        "1133-49686-272": 17
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0,
+                                    "inputs": ["up", "dn"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 1,
+                                        "1133-49686-272": 1
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["up", "dn"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 16,
+                                        "1133-49686-272": 16
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 0,
+                                        "1133-49686-272": 0
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 310,
+                                        "1133-49686-272": 288
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["f1"],
+                                    "player": 1
+                                }
+                            ]
+                        },
+                        {
+                            "location": "right",
+                            "busAddr": 2,
+                            "bkSwitches": 6,
+                            "events": [{
+                                    "index": {
+                                        "1118-765-2307": 5,
+                                        "1133-49686-272": 5
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["up", "dn"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 2,
+                                        "1133-49686-272": 2
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [-1, 1],
+                                    "itemType": 1,
+                                    "dzone": 0.1,
+                                    "inputs": ["lt", "rt"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 311,
+                                        "1133-49686-272": 291
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["f1"],
+                                    "player": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "2600 4 x Paddles\r4 x Gamepads",
+                    "defaults": [{
+                            "bus": 1,
+                            "chip": 44,
+                            "addr": 128,
+                            "data": 39
+                        },
+                        {
+                            "bus": 1,
+                            "chip": 44,
+                            "addr": 0,
+                            "data": 39
+                        },
+                        {
+                            "bus": 2,
+                            "chip": 44,
+                            "addr": 128,
+                            "data": 39
+                        },
+                        {
+                            "bus": 2,
+                            "chip": 44,
+                            "addr": 0,
+                            "data": 39
+                        }
+                    ],
+                    "ports": [{
+                            "location": "left",
+                            "busAddr": 1,
+                            "bkSwitches": 224,
+                            "events": [{
+                                    "index": {
+                                        "1118-765-2307": 2,
+                                        "1133-49686-272": 2
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [0, 255],
+                                    "itemType": 2,
+                                    "dzone": 0,
+                                    "inputs": ["pot0"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 315,
+                                        "1133-49686-272": 297
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk0"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 158,
+                                        "1133-49686-272": 296
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk1"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 304,
+                                        "1133-49686-272": 288
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["pf0"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 310,
+                                        "1133-49686-272": 292
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["pf0"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 2,
+                                        "1133-49686-272": 2
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [0, 255],
+                                    "itemType": 2,
+                                    "dzone": 0,
+                                    "inputs": ["pot1"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 304,
+                                        "1133-49686-272": 288
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["pf1"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 315,
+                                        "1133-49686-272": 297
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk0"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 158,
+                                        "1133-49686-272": 296
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk1"],
+                                    "player": 2
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 310,
+                                        "1133-49686-272": 292
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["pf1"],
+                                    "player": 2
+                                }
+                            ]
+                        },
+                        {
+                            "location": "right",
+                            "busAddr": 2,
+                            "bkSwitches": 224,
+                            "events": [{
+                                    "index": {
+                                        "1118-765-2307": 2,
+                                        "1133-49686-272": 2
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [0, 255],
+                                    "itemType": 2,
+                                    "dzone": 0,
+                                    "inputs": ["pot0"],
+                                    "player": 3
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 304,
+                                        "1133-49686-272": 288
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["pf0"],
+                                    "player": 3
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 315,
+                                        "1133-49686-272": 297
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk0"],
+                                    "player": 3
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 158,
+                                        "1133-49686-272": 296
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk1"],
+                                    "player": 3
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 310,
+                                        "1133-49686-272": 292
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["pf0"],
+                                    "player": 3
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 2,
+                                        "1133-49686-272": 2
+                                    },
+                                    "type": "EV_ABS",
+                                    "minmax": [0, 255],
+                                    "itemType": 2,
+                                    "dzone": 0,
+                                    "inputs": ["pot1"],
+                                    "player": 4
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 304,
+                                        "1133-49686-272": 288
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["pf1"],
+                                    "player": 4
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 315,
+                                        "1133-49686-272": 297
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk0"],
+                                    "player": 4
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 158,
+                                        "1133-49686-272": 296
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk1"],
+                                    "player": 4
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 310,
+                                        "1133-49686-272": 292
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["pf1"],
+                                    "player": 4
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "pam",
+            "templates": [{
+                "name": "5200 2 x Joystix\r2 x Gamepads",
+                "defaults": [{
+                        "bus": 1,
+                        "chip": 44,
+                        "addr": 128,
+                        "data": 39
+                    },
+                    {
+                        "bus": 1,
+                        "chip": 44,
+                        "addr": 0,
+                        "data": 39
+                    },
+                    {
+                        "bus": 2,
+                        "chip": 44,
+                        "addr": 128,
+                        "data": 39
+                    },
+                    {
+                        "bus": 2,
+                        "chip": 44,
+                        "addr": 0,
+                        "data": 39
+                    }
+                ],
+                "ports": [{
+                        "location": 0,
+                        "busAddr": 1,
+                        "bkSwitches": 224,
+                        "events": [{
+                                "index": {
+                                    "1118-765-2307": 17,
+                                    "1133-49686-272": 17
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0,
+                                "inputs": ["stv"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 1,
+                                    "1133-49686-272": 1
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [0, 255],
+                                "itemType": 2,
+                                "dzone": 0,
+                                "inputs": ["vrPot"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 5,
+                                    "1133-49686-272": 5
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [0, 255],
+                                "itemType": 2,
+                                "dzone": 0,
+                                "inputs": ["vrPot"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 16,
+                                    "1133-49686-272": 16
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0,
+                                "inputs": ["sth"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 0,
+                                    "1133-49686-272": 0
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [0, 255],
+                                "itemType": 2,
+                                "dzone": 0,
+                                "inputs": ["hrPot"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 2,
+                                    "1133-49686-272": 2
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [0, 255],
+                                "itemType": 2,
+                                "dzone": 0,
+                                "inputs": ["hrPot"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 310,
+                                    "1133-49686-272": 292
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["frTop"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 311,
+                                    "1133-49686-272": 293
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["frTop"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 10,
+                                    "1133-49686-272": 294
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["frBot"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 9,
+                                    "1133-49686-272": 295
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["frBot"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 307,
+                                    "1133-49686-272": 288
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["k1", "k4", "k7", "ks", "start"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 308,
+                                    "1133-49686-272": 291
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["k2", "k5", "k8", "k0", "pause"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 305,
+                                    "1133-49686-272": 290
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["k3", "k6", "k9", "kh", "reset"],
+                                "player": 1
+                            },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 315,
+                                        "1133-49686-272": 297
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk0"],
+                                    "player": 1
+                                },
+                                {
+                                    "index": {
+                                        "1118-765-2307": 158,
+                                        "1133-49686-272": 296
+                                    },
+                                    "type": "EV_KEY",
+                                    "minmax": [0, 1],
+                                    "itemType": 0,
+                                    "dzone": 0,
+                                    "inputs": ["lk1"],
+                                    "player": 1
+                                }
+                        ]
+                    },
+                    {
+                        "location": 1,
+                        "busAddr": 2,
+                        "bkSwitches": 224,
+                        "events": [{
+                                "index": {
+                                    "1118-765-2307": 17,
+                                    "1133-49686-272": 17
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0,
+                                "inputs": ["stv"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 1,
+                                    "1133-49686-272": 1
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [0, 255],
+                                "itemType": 2,
+                                "dzone": 0,
+                                "inputs": ["vrPot"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 5,
+                                    "1133-49686-272": 5
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [0, 255],
+                                "itemType": 2,
+                                "dzone": 0,
+                                "inputs": ["vrPot"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 16,
+                                    "1133-49686-272": 16
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0,
+                                "inputs": ["sth"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 0,
+                                    "1133-49686-272": 0
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [0, 255],
+                                "itemType": 2,
+                                "dzone": 0,
+                                "inputs": ["hrPot"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 2,
+                                    "1133-49686-272": 2
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [0, 255],
+                                "itemType": 2,
+                                "dzone": 0,
+                                "inputs": ["hrPot"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 310,
+                                    "1133-49686-272": 292
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["frTop"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 311,
+                                    "1133-49686-272": 293
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["frTop"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 10,
+                                    "1133-49686-272": 294
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["frBot"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 9,
+                                    "1133-49686-272": 295
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["frBot"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 307,
+                                    "1133-49686-272": 288
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["k1", "k4", "k7", "ks", "start"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 308,
+                                    "1133-49686-272": 291
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["k2", "k5", "k8", "k0", "pause"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 305,
+                                    "1133-49686-272": 290
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["k3", "k6", "k9", "kh", "reset"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 315,
+                                    "1133-49686-272": 297
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["lk0"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 158,
+                                    "1133-49686-272": 296
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["lk1"],
+                                "player": 2
+                            }
+                        ]
+                    }
+                ]
+            }]
+        },
+        {
+            "name": "maria",
+            "templates": [{
+                "name": "7800 2 x Joystix\r2 x Gamepads",
+                "defaults": [{
+                        "bus": 1,
+                        "chip": 44,
+                        "addr": 128,
+                        "data": 255
+                    },
+                    {
+                        "bus": 1,
+                        "chip": 44,
+                        "addr": 0,
+                        "data": 255
+                    },
+                    {
+                        "bus": 2,
+                        "chip": 44,
+                        "addr": 128,
+                        "data": 255
+                    },
+                    {
+                        "bus": 2,
+                        "chip": 44,
+                        "addr": 0,
+                        "data": 255
+                    }
+                ],
+                "ports": [{
+                        "location": "left",
+                        "busAddr": 1,
+                        "bkSwitches": 6,
+                        "events": [{
+                                "index": {
+                                    "1118-765-2307": 17,
+                                    "1133-49686-272": 17
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0,
+                                "inputs": ["up", "dn"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 1,
+                                    "1133-49686-272": 1
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0.4,
+                                "inputs": ["up", "dn"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 5,
+                                    "1133-49686-272": 5
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0.4,
+                                "inputs": ["up", "dn"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 16,
+                                    "1133-49686-272": 16
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0,
+                                "inputs": ["lt", "rt"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 0,
+                                    "1133-49686-272": 0
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0.4,
+                                "inputs": ["lt", "rt"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 2,
+                                    "1133-49686-272": 2
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0.4,
+                                "inputs": ["lt", "rt"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 304,
+                                    "1133-49686-272": 288
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["f1"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 310,
+                                    "1133-49686-272": 292
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["f1"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 305,
+                                    "1133-49686-272": 289
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["f2"],
+                                "player": 1
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 311,
+                                    "1133-49686-272": 293
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["f2"],
+                                "player": 1
+                            }
+                        ]
+                    },
+                    {
+                        "location": "right",
+                        "busAddr": 2,
+                        "bkSwitches": 6,
+                        "events": [{
+                                "index": {
+                                    "1118-765-2307": 17,
+                                    "1133-49686-272": 17
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0,
+                                "inputs": ["up", "dn"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 1,
+                                    "1133-49686-272": 1
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0.1,
+                                "inputs": ["up", "dn"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 5,
+                                    "1133-49686-272": 5
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0.1,
+                                "inputs": ["up", "dn"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 16,
+                                    "1133-49686-272": 16
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0,
+                                "inputs": ["lt", "rt"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 0,
+                                    "1133-49686-272": 0
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0.1,
+                                "inputs": ["lt", "rt"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 2,
+                                    "1133-49686-272": 2
+                                },
+                                "type": "EV_ABS",
+                                "minmax": [-1, 1],
+                                "itemType": 1,
+                                "dzone": 0.1,
+                                "inputs": ["lt", "rt"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 304,
+                                    "1133-49686-272": 288
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["f1"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 310,
+                                    "1133-49686-272": 292
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["f1"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 305,
+                                    "1133-49686-272": 289
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["f2"],
+                                "player": 2
+                            },
+                            {
+                                "index": {
+                                    "1118-765-2307": 311,
+                                    "1133-49686-272": 293
+                                },
+                                "type": "EV_KEY",
+                                "minmax": [0, 1],
+                                "itemType": 0,
+                                "dzone": 0,
+                                "inputs": ["f2"],
+                                "player": 2
+                            }
+                        ]
+                    }
+                ]
+            }]
+        }
+    ],
+    "addresses": {
+        "jsBk": [75, 6],
+        "pdBk": [75, 224],
+        "kpBk": [75, 224],
+        "pmBk": [75, 224],
+        "up": [72, 1],
+        "dn": [73, 1],
+        "lt": [74, 1],
+        "rt": [75, 1],
+        "f1": [72, 4],
+        "f2": [72, 2],
+        "pf0": [75, 1],
+        "pf1": [74, 1],
+        "pot0": [44, 128],
+        "pot1": [44, 0],
+        "hrPot": [44, 128],
+        "vrPot": [44, 0],
+        "start": [72, 1],
+        "pause": [73, 1],
+        "reset": [74, 1],
+        "frTop": [74, 2],
+        "frBot": [75, 1],
+        "k1": [72, 128],
+        "k2": [73, 128],
+        "k3": [74, 128],
+        "k4": [72, 64],
+        "k5": [73, 64],
+        "k6": [74, 64],
+        "k7": [72, 32],
+        "k8": [73, 32],
+        "k9": [74, 32],
+        "ks": [72, 16],
+        "k0": [73, 16],
+        "kh": [74, 16],
+        "1-128": 0,
+        "1-0": 1,
+        "2-128": 2,
+        "2-0": 3,
+        "4-128": 4,
+        "4-0": 5,
+        "8-128": 6,
+        "8-0": 7
+    }
+}
