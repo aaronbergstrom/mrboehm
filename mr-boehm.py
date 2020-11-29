@@ -992,7 +992,7 @@ def setTemplateDefaults():
 #                i += 1
             for port in template["ports"]:
                 bus.write_byte(0x70, port["busAddr"])
-                bus.write_byte(0x4B, port["bkSwitches"])
+#                bus.write_byte(0x4B, port["bkSwitches"])
 
 def loadGamepadSupport():
     global conSupport
