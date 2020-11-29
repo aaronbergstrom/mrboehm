@@ -170,6 +170,9 @@ potaxis = [0x80,0x00]
 #s_chips = [0x48,0x49,0x4A]
 s_chips = [0x48,0x49,0x4A,0x4B]
 
+dac_chips = [0x48,0x49]
+dac_pins = [0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F]
+
 players = []
 conSupport = None
 
@@ -359,7 +362,7 @@ class GameController:
 #                    print(event.code)
 #                        print("checkpoint A")
 
-                    if evInfo["chip"][0] == "stv":
+                    if evInfo["chip"][0] == "stv": #Stick Vertical
                         if event.value == 1:
                             self.state = 4
 #                            print("State:",self.state)
@@ -370,7 +373,7 @@ class GameController:
                             self.state = 0
 #                            print("State:",self.state)
 
-                    elif evInfo["chip"][0] == "sth":
+                    elif evInfo["chip"][0] == "sth": #Stick Horizontal
                         if event.value == 1:
                             self.state = 3
 #                            print("State:",self.state)
@@ -991,7 +994,45 @@ def setTemplateDefaults():
 #                print("Pot Read:", bus.read_byte_data(defs["chip"], defs["addr"]))
 #                i += 1
             for port in template["ports"]:
+                #Changing multiplexer to console port
                 bus.write_byte(0x70, port["busAddr"])
+                #Setting the default values for the 2 DAC chips and the GPIO chip
+                #
+                # GPIO - i2c address - 0x27
+                
+                ###########################################################
+                # DAC Info:
+                # dec=199 #set this value between 0 and 255
+                # qt=int(hex(dec//16),0) # Requires the Floor Division operator "//"
+                # rm=int(hex((dec%16)*16),0)
+                # After looking at it closer you can probably just use:
+                # qt=dec//16
+                # rm=(dec%16)*16
+                ###########################################################
+                # DAC1 - i2c address - 0x48
+                # DAC2 - i2c address - 0x49
+                for dac in dac_chips:
+                    #Because we are changing controller types, the first thing we
+                    #want to do is disenagage power output of the DAC so that we
+                    #don't damage the console.
+                    bus.write_i2c_block_data(dac,0x01,[0xFF,0xFF])
+                    
+                    #Set the voltage of each pin on this DAC to zero.
+                    for pin in dac_pins:
+                        bus.write_i2c_block_data(dac,pin,[0x00,0x00])
+                    #Turn the power output for this dac backon.
+                    bus.write_i2c_block_data(dac,0x01,[0x00,0x00])
+                #####################################################
+                # JDAC - Joint DAC Address for simultaneous updates #
+                #####################################################
+                # JDAC - i2c address - 0x47
+                #
+                #
+                
+#################################################################################
+#               Old code for first iteration of the project.
+#               No longer relevant
+#################################################################################
 #                bus.write_byte(0x4B, port["bkSwitches"])
 
 def loadGamepadSupport():
