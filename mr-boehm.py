@@ -1029,7 +1029,11 @@ def setTemplateDefaults():
                         #Turn the power output for this dac backon.
                         bus.write_i2c_block_data(dac,0x01,[0x00,0x00])
                     else:
-                        print("Need to Write GPIO Default Chip Code")
+                        #GPIO chip
+                        gpioc = chip["addr"]
+                        bus.write_byte(gpioc, 0x06, 0x00)
+                        bus.write_byte(gpioc, 0x07, 0x00)
+
                 #####################################################
                 # JDAC - Joint DAC Address for simultaneous updates #
                 #####################################################
