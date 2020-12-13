@@ -1031,8 +1031,8 @@ def setTemplateDefaults():
                     else:
                         #GPIO chip
                         gpioc = chip["addr"]
-                        bus.write_i2c_block_data(gpioc, 0x06, 0x00)
-                        bus.write_i2c_block_data(gpioc, 0x07, 0x00)
+                        bus.write_i2c_block_data(gpioc, 0x06, [0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07])
+                        bus.write_i2c_block_data(gpioc, 0x07, [0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07])
 
                 #####################################################
                 # JDAC - Joint DAC Address for simultaneous updates #
