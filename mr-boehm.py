@@ -351,163 +351,223 @@ class GameController:
                         await self.potUpdate(self.pots[pot][0],[0x2c,self.pots[pot][1]], cVal)
                         
             await asyncio.sleep(0.0333)
-    
-#    def processEvent(self, event):
+
+############
+#EVINFO JSON
+############
+#{
+#    "17":
+#        {
+#            "bus":0,
+#            "inputs": [
+#                {
+#                    "chip": 27,
+#                    "pin": 1
+#                },
+#                {
+#                    "chip": 27,
+#                    "pin": 2
+#                }
+#            ],
+#            "actiontype": 1,
+#            "dzone":80,
+#            "mod":255
+#        },
+#    "208":
+#        {
+#            "bus": 0,
+#            "inputs": [
+#                {
+#                    "chip": 27,
+#                    "pin": 1
+#                },
+#                {
+#                    "chip": 27,
+#                    "pin": 2
+#                }
+#            ],
+#            "actiontype": 1,
+#            "dzone":80,
+#            "mod":255
+#        },
+#    "elist":"-17--208-"
+#}
+#
+#actionType:
+#    Button 0
+#    Hat 1
+#    Pot 2
+
     async def processEvent(self):
         async for event in self.device.async_read_loop():
             if self.bus != None and (event.type == ecodes.EV_ABS or event.type == ecodes.EV_KEY):
-#                print("Player:",self.player)
-#                print(self.events["elist"])
+                ### Not sure what self.events["elist"] does
                 checkCode = "-"+str(event.code)+"-"
                 if checkCode in self.events["elist"]:
                     evInfo = self.events[str(event.code)]
-#                    print("Bus:", evInfo["bus"])
-#                    print(event.code)
-#                        print("checkpoint A")
 
-                    if evInfo["chip"][0] == "stv": #Stick Vertical
-                        if event.value == 1:
-                            self.state = 4
-#                            print("State:",self.state)
-                        elif event.value == -1:
-                            self.state = 2
-#                            print("State:",self.state)
-                        elif event.value == 0:
-                            self.state = 0
-#                            print("State:",self.state)
+                    #Set the multiplexer to the correct channel
+                    tbus = evInfo["bus"]
+                    self.bus.write_byte(0x70, tbus)
+                    
+                    p0Cur = self.bus.read_byte(gpioc, 0x06)
+                    p1Cur = self.bus.read_byte(gpioc, 0x07)
 
-                    elif evInfo["chip"][0] == "sth": #Stick Horizontal
+                    actionType = evInfo["actiontype"]
+                    if actiontype == 0:
+                        uPort = 0x06
+                        pin = evInfo["inputs"][0]["pin"]
+                        pBit = 1
+                        
+                        if pin > 8:
+                            uPort = 0x07
+                            pin = pin-8
+                        pBit = pBit << (pin-1)
+                        
+                        pCur = self.bus.read_i2c_block_data(gpioc, uPort, 1)
                         if event.value == 1:
-                            self.state = 3
-#                            print("State:",self.state)
-                        elif event.value == -1:
-                            self.state = 1
-#                            print("State:",self.state)
-                        elif event.value == 0:
-                            self.state = 0
-#                            print("State:",self.state)
-                    elif evInfo["chip"][0] == "lk0":
-#                        print("Button:", event.code, event.value)
-                        if event.value == 0:
-                            if self.lock[(self.player-1) * 4] == False:
-                                self.lock[(self.player-1) * 4] = True
-                            else:
-                                self.lock[(self.player-1) * 4] = False
-                    elif evInfo["chip"][0] == "lk1":
-#                        print("Button:", event.code, event.value)
-                        if event.value == 0:
-                            if self.lock[((self.player-1) * 4) + 1] == False:
-                                self.lock[((self.player-1) * 4) + 1] = True
-                            else:
-                                self.lock[((self.player-1) * 4) + 1] = False
-                    elif evInfo["chip"][0] == "lk2":
-                        if event.value == 0:
-                            if self.lock[((self.player-1) * 4) + 2] == False:
-                                self.lock[((self.player-1) * 4) + 2] = True
-                            else:
-                                self.lock[((self.player-1) * 4) + 2] = False
-                    elif evInfo["chip"][0] == "lk3":
-                        if event.value == 0:
-                            if self.lock[((self.player-1) * 4) + 3] == False:
-                                self.lock[((self.player-1) * 4) + 3] = True
-                            else:
-                                self.lock[((self.player-1) * 4) + 3] = False
-                    else:
-                        tbus = evInfo["bus"]
-#                        print("checkpoint Z", "Tbus:", str(tbus))
-                        self.bus.write_byte(0x70, tbus)
-                        chipVal = None
-                        if len(evInfo["chip"]) > 2:
-                            chipVal = self.addresses[evInfo["chip"][self.state]]
- #                           print("State:", self.state,"Chip Tag:", evInfo["chip"][self.state], "Chip:", chipVal[0], "Byte:", chipVal[1])
+                            # Change the read from the GPIO pin so that the pin is set to
+                            # to input once the byte has been written back to the GPIO
+                            pCur = pCur | pBit
                         else:
-                            chipVal = self.addresses[evInfo["chip"][0]]
+                            # Change the read from the GPIO pin so that the pin is set to
+                            # to output once the byte has been written back to the GPIO
+                            pCur = pCur ^ pBit
+                        self.bus.write_i2c_block_data(gpioc, uPort, pCur)
                             
-                        modifier = evInfo["mod"]
-                        cType = evInfo["type"]
-                        dZone = evInfo["dzone"]
+#                        chipVal = None
+#                        if len(evInfo["chip"]) > 2:
+#                            chipVal = self.addresses[evInfo["chip"][self.state]]
+#                        else:
+#                            chipVal = self.addresses[evInfo["chip"][0]]
+                            
+#                        modifier = evInfo["mod"]
+#                        cType = evInfo["type"]
+#                        dZone = evInfo["dzone"]
 
-                        mvalue = event.value
-                        #button 0
-                        if cType  == 0:
-                            if modifier > 1:
-                                if mvalue < 20:
-                                    mvalue = 0
-                                else:
-                                    mvalue = 1
-                            reg = self.bus.read_byte(chipVal[0])
-                            tReg = chipVal[1]
-                            if mvalue == 0:
-                                tReg = ~chipVal[1]
-                                reg = reg & tReg
-                            else:
-                                reg = reg | tReg
-#                                print("Button:", chipVal[0], "Register:", reg)
-#############################
-#                            self.buttonUpdate(tbus, chipVal[0], reg)
-                            await self.buttonUpdate(tbus, chipVal[0], reg)
-#                            print("Button:", event.code, event.value)
-#                            await asyncio.sleep(0.0001)
-#                            self.bus.write_byte(chipVal[0],reg)
-                        #hat    1
-                        elif cType == 1:
-                            chipVal1 = self.addresses[evInfo["chip"][1]]
-                            if modifier != 1:
-                                mvalue = mvalue - (modifier/2)
-                                if mvalue < (-1*dZone):
-                                    mvalue = -1
-                                elif mvalue > dZone:
-                                    mvalue = 1
-                                else:
-                                    mvalue = 0
-                            reg  = self.bus.read_byte(chipVal[0])
-                            reg1 = self.bus.read_byte(chipVal1[0])
-                            if mvalue == -1:
-                                reg  =  reg |  chipVal[1]
-                                reg1 = reg1 & ~chipVal1[1]
-#################################
-                                await self.hatUpdate(tbus, chipVal[0], reg, chipVal1[0], reg1)
-#                                self.bus.write_byte(chipVal[0],reg)
-#                                self.bus.write_byte(chipVal1[0],reg1)
-                            elif mvalue == 1:
-                                reg  =  reg & ~chipVal[1]
-                                reg1 = reg1 | chipVal1[1]
-#################################
-                                await self.hatUpdate(tbus, chipVal[0], reg, chipVal1[0], reg1)
-#                                self.bus.write_byte(chipVal[0],reg)
-#                                self.bus.write_byte(chipVal1[0],reg1)
-                            else:
-                                reg  =  reg & ~chipVal[1]
-                                reg1 = reg1 & ~chipVal1[1]
-#################################
-                                await self.hatUpdate(tbus, chipVal[0], reg, chipVal1[0], reg1)
-#                                self.bus.write_byte(chipVal[0],reg)
-#                                self.bus.write_byte(chipVal1[0],reg1)
-                        #pot    2
-                        else:
-                            nvalue = int(round(mvalue * 255/modifier))
-                            idx = str(tbus)+"-"+str(chipVal[1])
-                            pIndex = self.addresses[idx]
-                            if self.lock[((self.player-1) * 4) + 1] == False:
-                                nvalue = 255 - nvalue
-                            if self.lock[((self.player-1) * 4)]:
-                                if nvalue < 120:
-                                    self.pots[idx][2] = 1
-                                elif nvalue > 132:
-                                    self.pots[idx][2] = -1
-                                else:
-                                    self.pots[idx][2] = 0
-                            else:
-                                if nvalue < 88:
-                                    nvalue = 88
-                                elif nvalue > 167:
-                                    nvalue = 167
-                                nvalue = nvalue-88
-#################################
-#                                print("CPV:", chipVal[0], chipVal[1], nvalue)
-                                await self.potUpdate(tbus, chipVal, nvalue)
-#                                print("--9")
-#                                self.bus.write_byte_data(chipVal[0],chipVal[1],nvalue)
+#######################
+# Old Code
+#######################
+
+#    async def processEvent(self):
+#        async for event in self.device.async_read_loop():
+#            if self.bus != None and (event.type == ecodes.EV_ABS or event.type == ecodes.EV_KEY):
+#                checkCode = "-"+str(event.code)+"-"
+#                if checkCode in self.events["elist"]:
+#                    evInfo = self.events[str(event.code)]
+#                    if evInfo["chip"][0] == "stv": #Stick Vertical
+#                        if event.value == 1:
+#                            self.state = 4
+#                        elif event.value == -1:
+#                            self.state = 2
+#                        elif event.value == 0:
+#                            self.state = 0
+#
+#                    elif evInfo["chip"][0] == "sth": #Stick Horizontal
+#                        if event.value == 1:
+#                            self.state = 3
+#                        elif event.value == -1:
+#                            self.state = 1
+#                        elif event.value == 0:
+#                            self.state = 0
+#                    elif evInfo["chip"][0] == "lk0":
+#                        if event.value == 0:
+#                            if self.lock[(self.player-1) * 4] == False:
+#                                self.lock[(self.player-1) * 4] = True
+#                            else:
+#                                self.lock[(self.player-1) * 4] = False
+#                    elif evInfo["chip"][0] == "lk1":
+#                        if event.value == 0:
+#                            if self.lock[((self.player-1) * 4) + 1] == False:
+#                                self.lock[((self.player-1) * 4) + 1] = True
+#                            else:
+#                                self.lock[((self.player-1) * 4) + 1] = False
+#                    elif evInfo["chip"][0] == "lk2":
+#                        if event.value == 0:
+#                            if self.lock[((self.player-1) * 4) + 2] == False:
+#                                self.lock[((self.player-1) * 4) + 2] = True
+#                            else:
+#                                self.lock[((self.player-1) * 4) + 2] = False
+#                    elif evInfo["chip"][0] == "lk3":
+#                        if event.value == 0:
+#                            if self.lock[((self.player-1) * 4) + 3] == False:
+#                                self.lock[((self.player-1) * 4) + 3] = True
+#                            else:
+#                                self.lock[((self.player-1) * 4) + 3] = False
+#                    else:
+#                        tbus = evInfo["bus"]
+#                        self.bus.write_byte(0x70, tbus)
+#                        chipVal = None
+#                        if len(evInfo["chip"]) > 2:
+#                            chipVal = self.addresses[evInfo["chip"][self.state]]
+#                        else:
+#                            chipVal = self.addresses[evInfo["chip"][0]]
+#                            
+#                        modifier = evInfo["mod"]
+#                        cType = evInfo["type"]
+#                        dZone = evInfo["dzone"]
+#
+#                        mvalue = event.value
+#                        #button 0
+#                        if cType  == 0:
+#                            if modifier > 1:
+#                                if mvalue < 20:
+#                                    mvalue = 0
+#                                else:
+#                                    mvalue = 1
+#                            reg = self.bus.read_byte(chipVal[0])
+#                            tReg = chipVal[1]
+#                            if mvalue == 0:
+#                                tReg = ~chipVal[1]
+#                                reg = reg & tReg
+#                            else:
+#                                reg = reg | tReg
+#                            await self.buttonUpdate(tbus, chipVal[0], reg)
+#                        elif cType == 1:
+#                            chipVal1 = self.addresses[evInfo["chip"][1]]
+#                            if modifier != 1:
+#                                mvalue = mvalue - (modifier/2)
+#                                if mvalue < (-1*dZone):
+#                                    mvalue = -1
+#                                elif mvalue > dZone:
+#                                    mvalue = 1
+#                                else:
+#                                    mvalue = 0
+#                            reg  = self.bus.read_byte(chipVal[0])
+#                            reg1 = self.bus.read_byte(chipVal1[0])
+#                            if mvalue == -1:
+#                                reg  =  reg |  chipVal[1]
+#                                reg1 = reg1 & ~chipVal1[1]
+#                                await self.hatUpdate(tbus, chipVal[0], reg, chipVal1[0], reg1)
+#                            elif mvalue == 1:
+#                                reg  =  reg & ~chipVal[1]
+#                                reg1 = reg1 | chipVal1[1]
+#                                await self.hatUpdate(tbus, chipVal[0], reg, chipVal1[0], reg1)
+#                            else:
+#                                reg  =  reg & ~chipVal[1]
+#                                reg1 = reg1 & ~chipVal1[1]
+#                                await self.hatUpdate(tbus, chipVal[0], reg, chipVal1[0], reg1)
+#                        #pot    2
+#                        else:
+#                            nvalue = int(round(mvalue * 255/modifier))
+#                            idx = str(tbus)+"-"+str(chipVal[1])
+#                            pIndex = self.addresses[idx]
+#                            if self.lock[((self.player-1) * 4) + 1] == False:
+#                                nvalue = 255 - nvalue
+#                            if self.lock[((self.player-1) * 4)]:
+#                                if nvalue < 120:
+#                                    self.pots[idx][2] = 1
+#                                elif nvalue > 132:
+#                                    self.pots[idx][2] = -1
+#                                else:
+#                                    self.pots[idx][2] = 0
+#                            else:
+#                                if nvalue < 88:
+#                                    nvalue = 88
+#                                elif nvalue > 167:
+#                                    nvalue = 167
+#                                nvalue = nvalue-88
+#                                await self.potUpdate(tbus, chipVal, nvalue)
         
     def updateConSupport(self, conSupport):
         if conSupport != None:
@@ -525,14 +585,14 @@ class GameController:
 #                print("Info Version:", self.device.info.version, "Gamepad Vendor:", gamepad["version"])
         for console in self.conSupport["consoles"]:
             if self.conSupport["default"]["console"] == console["name"]:
+                self.addresses = console["addresses"]
                 self.template = console["templates"][self.conSupport["default"]["template"]]
-        self.addresses = self.conSupport["addresses"]
 
-        for defs in self.template["defaults"]:
-            bus.write_byte(0x70, defs["bus"])
-            bus.write_byte_data(defs["chip"], defs["addr"], defs["data"])
+#        for defs in self.template["defaults"]:
+#            bus.write_byte(0x70, defs["bus"])
+#            bus.write_byte_data(defs["chip"], defs["addr"], defs["data"])
 
-        tPot = "{"
+#        tPot = "{"
         eventSet = "{"
         eventList = ""
         for event in self.gamepad["events"]:
@@ -542,32 +602,33 @@ class GameController:
                         nIndex = pevent["index"][self.gamepad["full"]]
                         if event["index"] == nIndex:
                             ####Check for Pot###
-                            if pevent["itemType"] == 2:
-                                gAddr = self.addresses[pevent["inputs"][0]]
-                                nPot = '"' + str(port["busAddr"]) + '-' + str(gAddr[1]) + '": ['
-                                nPot += str(port["busAddr"]) + ',' + str(gAddr[1]) + ',0],'
-                                tPot += nPot
+                            #if pevent["itemType"] == 2:
+                            #    gAddr = self.addresses[pevent["inputs"][0]]
+                            #    nPot = '"' + str(port["busAddr"]) + '-' + str(gAddr[1]) + '": ['
+                            #    nPot += str(port["busAddr"]) + ',' + str(gAddr[1]) + ',0],'
+                            #    tPot += nPot
                             eventList += "-"
                             eventList += str(nIndex)
                             eventList += "-"
-                            eventItem = '"' + str(nIndex) + '": {"bus": ' + str(port["busAddr"]) + ',"chip": ['
+                            eventItem = '"' + str(nIndex) + '": {"bus": ' + str(port["busAddr"]) + ','
+                            eventItem += '"inputs": ['
                             for inp in pevent["inputs"]:
-                                eventItem += '"'
-                                eventItem += inp
-                                eventItem += '",'
+                                gAddr = self.addresses[inp]
+                                eventItem += '{"chip": ' + str(gAddr[0]) + ',"pin": ' + str(gAddr[1]) + '},'
                             eventItem = eventItem[:len(eventItem)-1]
                             eventItem +='],"type": ' + str(pevent["itemType"]) + ',"dzone": ' + str(int(pevent["dzone"] * event["minmax"][1])) + ',"mod": ' + str(event["minmax"][1]) + '},'
                             eventSet += eventItem
 #                        else:
 #                            print("EI:", event["index"],"PEI:", nIndex)
 #        eventSet = eventSet[:len(eventSet)-1]
-        if len(tPot) > 1:
-            tPot = tPot[:len(tPot)-1]
-            tPot += "}"
+#        if len(tPot) > 1:
+#            tPot = tPot[:len(tPot)-1]
+#            tPot += "}"
 #            print(tPot)
-            self.pots = json.loads(tPot)
-        else:
-            self.pots = None
+#            self.pots = json.loads(tPot)
+#        else:
+#            self.pots = None
+        self.pots = None
         eventSet += '"elist": "'
         eventSet += eventList
         eventSet += '"}'
@@ -1012,16 +1073,22 @@ def setTemplateDefaults():
                 # qt=dec//16
                 # rm=(dec%16)*16
                 ###########################################################
-                # DAC1 - i2c address - 0x48
-                # DAC2 - i2c address - 0x49
+                # DAC1 - i2c address - 0x48 - 72 in decimal
+                # DAC2 - i2c address - 0x49 - 73 in decimal
+                #####################################################
+                # JDAC - Joint DAC Address for simultaneous updates #
+                #####################################################
+                # JDAC - i2c address - 0x47 - 71 in decimal
+                
+                # Turn off power to all DAC Chips:
+                jdac = 71
+                # Because we are changing controller types, the first thing we
+                # want to do is disenagage power output of the DAC so that we
+                # don't damage the console.
+                bus.write_i2c_block_data(jdac,0x01,[0xFF,0xFF])
+                
                 for chip in defBus["chips"]:
                     if chip["type"] == "DAC":
-                        #Because we are changing controller types, the first thing we
-                        #want to do is disenagage power output of the DAC so that we
-                        #don't damage the console.
-                        dac = chip["addr"]
-                        bus.write_i2c_block_data(dac,0x01,[0xFF,0xFF])
-                    
                         #Set the voltage of each pin on this DAC to zero.
                         i=0
                         for pin in dac_pins:
@@ -1029,19 +1096,19 @@ def setTemplateDefaults():
                             rm = (chip["volt"][i] % 16 * 16)
                             bus.write_i2c_block_data(dac,pin,[qt,rm])
                             i = i+1
-                        #Turn the power output for this dac backon.
-                        bus.write_i2c_block_data(dac,0x01,[0x00,0x00])
-                    else:
+                            
+                    elif chip["type"] == "GPIO":
                         #GPIO chip
+                        #Set Ports 0 (pins 4-11) and 1 (pins 13-20) to 0 voltz
                         gpioc = chip["addr"]
-                        bus.write_byte_data(gpioc, 0x06, 0xFF)
-                        bus.write_byte_data(gpioc, 0x07, 0xFF)
-                #####################################################
-                # JDAC - Joint DAC Address for simultaneous updates #
-                #####################################################
-                # JDAC - i2c address - 0x47
-                #
-                #
+                        bus.write_i2c_block_data(gpioc, 0x02, 0x00)
+                        bus.write_i2c_block_data(gpioc, 0x03, 0x00)
+                        
+                        bus.write_i2c_block_data(gpioc, 0x06, 0x00)
+                        bus.write_i2c_block_data(gpioc, 0x07, 0x00)
+                        
+                #Turn the power output for this dac backon.        
+                bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
                 
 #################################################################################
 #               Old code for first iteration of the project.
