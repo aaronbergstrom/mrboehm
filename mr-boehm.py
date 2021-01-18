@@ -1101,11 +1101,11 @@ def setTemplateDefaults():
                         #GPIO chip
                         #Set Ports 0 (pins 4-11) and 1 (pins 13-20) to 0 voltz
                         gpioc = chip["addr"]
-                        bus.write_i2c_block_data(gpioc, 0x02, 0x00)
-                        bus.write_i2c_block_data(gpioc, 0x03, 0x00)
+                        bus.write_i2c_block_data(gpioc, 0x02, [0x00])
+                        bus.write_i2c_block_data(gpioc, 0x03, [0x00])
                         
-                        bus.write_i2c_block_data(gpioc, 0x06, 0x00)
-                        bus.write_i2c_block_data(gpioc, 0x07, 0x00)
+                        bus.write_i2c_block_data(gpioc, 0x06, [0x00])
+                        bus.write_i2c_block_data(gpioc, 0x07, [0x00])
                         
                 #Turn the power output for this dac backon.        
                 bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
