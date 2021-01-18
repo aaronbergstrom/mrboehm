@@ -1132,7 +1132,7 @@ def main():
 #    establishMonitoring()
     
     loadGamepadSupport()
-#    monitorGamepads()
+    monitorGamepads()
     monitorKeyboards()
     
     
