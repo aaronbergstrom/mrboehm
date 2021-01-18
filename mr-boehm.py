@@ -399,7 +399,9 @@ class GameController:
 #    Pot 2
 
     async def processEvent(self):
+        print("pE")
         async for event in self.device.async_read_loop():
+            print("Pe2")
             if self.bus != None and (event.type == ecodes.EV_ABS or event.type == ecodes.EV_KEY):
                 ### Not sure what self.events["elist"] does
                 checkCode = "-"+str(event.code)+"-"
@@ -1154,7 +1156,7 @@ def main():
     loop = asyncio.get_event_loop()
     loop.run_until_complete(waitToEnd())
         
-#    disconnectControllers()
+    disconnectControllers()
     bus.write_byte(mplex, 0x00)
     print("Done")
 #    lcd.clear()
