@@ -417,7 +417,7 @@ class GameController:
                     
                     actionType = evInfo["actiontype"]
                     print("3")
-                    if actiontype == 0:
+                    if actionType == 0:
                         print("4")
                         uPort = 0x06
                         print("5")
