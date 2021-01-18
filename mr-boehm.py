@@ -410,29 +410,28 @@ class GameController:
                     tbus = evInfo["bus"]
                     self.bus.write_byte(0x70, tbus)
                     
-                    p0Cur = self.bus.read_byte(gpioc, 0x06)
-                    p1Cur = self.bus.read_byte(gpioc, 0x07)
-
                     actionType = evInfo["actiontype"]
                     if actiontype == 0:
                         uPort = 0x06
+                        cIdx = 0
                         pin = evInfo["inputs"][0]["pin"]
                         pBit = 1
                         
                         if pin > 8:
                             uPort = 0x07
                             pin = pin-8
+                            cIdx = 1
                         pBit = pBit << (pin-1)
                         
-                        pCur = self.bus.read_i2c_block_data(gpioc, uPort, 1)
+                        pCur = self.bus.read_i2c_block_data(gpioc, uPort, 2)
                         if event.value == 1:
                             # Change the read from the GPIO pin so that the pin is set to
                             # to input once the byte has been written back to the GPIO
-                            pCur = pCur | pBit
+                            pCur[cIdx] = pCur[cIdx] | pBit
                         else:
                             # Change the read from the GPIO pin so that the pin is set to
                             # to output once the byte has been written back to the GPIO
-                            pCur = pCur ^ pBit
+                            pCur[cIdx] = pCur[cIdx] ^ pBit
                         self.bus.write_i2c_block_data(gpioc, uPort, pCur)
                             
 #                        chipVal = None
@@ -1101,11 +1100,12 @@ def setTemplateDefaults():
                         #GPIO chip
                         #Set Ports 0 (pins 4-11) and 1 (pins 13-20) to 0 voltz
                         gpioc = chip["addr"]
-                        bus.write_i2c_block_data(gpioc, 0x02, [0x00])
-                        bus.write_i2c_block_data(gpioc, 0x03, [0x00])
+                        bus.write_i2c_block_data(gpioc, 0x02, [0x00,0x00])
+                        bus.write_i2c_block_data(gpioc, 0x03, [0x00,0x00])
                         
-                        bus.write_i2c_block_data(gpioc, 0x06, [0x00])
-                        bus.write_i2c_block_data(gpioc, 0x07, [0x00])
+                        #Set Ports 0 and 1 to output
+                        bus.write_i2c_block_data(gpioc, 0x06, [0x00,0x00])
+                        bus.write_i2c_block_data(gpioc, 0x07, [0x00,0x00])
                         
                 #Turn the power output for this dac backon.        
                 bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
