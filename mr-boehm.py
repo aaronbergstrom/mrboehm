@@ -407,6 +407,7 @@ class GameController:
                 checkCode = "-"+str(event.code)+"-"
                 if checkCode in self.events["elist"]:
                     evInfo = self.events[str(event.code)]
+                    print(evInfo)
 
                     #Set the multiplexer to the correct channel
                     tbus = evInfo["bus"]
