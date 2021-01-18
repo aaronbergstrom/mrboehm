@@ -647,7 +647,7 @@ class GameController:
                                 gAddr = self.addresses[inp]
                                 eventItem += '{"chip": ' + str(gAddr[0]) + ',"pin": ' + str(gAddr[1]) + '},'
                             eventItem = eventItem[:len(eventItem)-1]
-                            eventItem +='],"type": ' + str(pevent["itemType"]) + ',"dzone": ' + str(int(pevent["dzone"] * event["minmax"][1])) + ',"mod": ' + str(event["minmax"][1]) + '},'
+                            eventItem +='],"actiontype": ' + str(pevent["itemType"]) + ',"dzone": ' + str(int(pevent["dzone"] * event["minmax"][1])) + ',"mod": ' + str(event["minmax"][1]) + '},'
                             eventSet += eventItem
 #                        else:
 #                            print("EI:", event["index"],"PEI:", nIndex)
