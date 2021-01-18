@@ -279,7 +279,7 @@ class GameController:
         self.state = 0
         self.lock = [False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False]
         self.updateConSupport(conSupport)
-        self.tasks = [asyncio.ensure_future(self.processEvent()), asyncio.ensure_future(self.pollPentometers())]
+        self.tasks = [asyncio.ensure_future(self.processEvent())]
         print("Created:", self.device.name)
 
 #        async for event in device.async_read_loop():
@@ -417,7 +417,7 @@ class GameController:
                         pin = evInfo["inputs"][0]["pin"]
                         pBit = 1
                         
-                        print("Event Code: " + event.code + ", Event Value: " + event.value)
+                        print("Event Code: " + event.code + ", Event Value: " + event.value+". Button Action Type Called.\n")
                         
                         if pin > 8:
                             uPort = 0x07
@@ -435,7 +435,14 @@ class GameController:
                             # to output once the byte has been written back to the GPIO
                             pCur[cIdx] = pCur[cIdx] ^ pBit
                         self.bus.write_i2c_block_data(gpioc, uPort, pCur)
-                            
+                else:
+                    print("Event Code: " + str(event.code) + ", Event Value: " + str(event.value) + ", not found in elist.\n")
+            else:
+                
+                print("Event Type: " + str(event.type) + ".\n")
+                if self.bus == None:
+                    print("No bus found.\n")
+
 #                        chipVal = None
 #                        if len(evInfo["chip"]) > 2:
 #                            chipVal = self.addresses[evInfo["chip"][self.state]]
