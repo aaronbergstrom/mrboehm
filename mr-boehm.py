@@ -1093,7 +1093,7 @@ def setTemplateDefaults():
                         for pin in dac_pins:
                             qt = chip["volt"][i] // 16
                             rm = (chip["volt"][i] % 16 * 16)
-                            bus.write_i2c_block_data(dac,pin,[qt,rm])
+                            bus.write_i2c_block_data(chip["addr"],pin,[qt,rm])
                             i = i+1
                             
                     elif chip["type"] == "GPIO":
