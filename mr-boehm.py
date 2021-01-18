@@ -439,7 +439,7 @@ class GameController:
                             cIdx = 1
                             print("12")
                         pBit = pBit << (pin-1)
-                            print("13")
+                        print("13")
                         
                         pCur = self.bus.read_i2c_block_data(gpioc, uPort, 2)
                         print("14")
