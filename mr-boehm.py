@@ -411,24 +411,16 @@ class GameController:
 
                     #Set the multiplexer to the correct channel
                     tbus = evInfo["bus"]
-                    print("1")
                     self.bus.write_byte(0x70, tbus)
-                    print("2")
                     
-                    actionType = evInfo["actiontype"]
-                    print("3")
+                    actionType = evInfo["actionType"]
                     if actionType == 0:
-                        print("4")
                         uPort = 0x06
-                        print("5")
                         cIdx = 0
-                        print("6")
                         pin = evInfo["inputs"][0]["pin"]
-                        print("7")
                         pBit = 1
-                        print("8")
                         
-                        print("Event Code: " + event.code + ", Event Value: " + event.value+". Button Action Type Called.\n")
+                        print("Event Code: " + str(event.code) + ", Event Value: " + str(event.value) + ". Button Action Type Called.\n")
                         
                         if pin > 8:
                             print("9")
@@ -647,7 +639,7 @@ class GameController:
                                 gAddr = self.addresses[inp]
                                 eventItem += '{"chip": ' + str(gAddr[0]) + ',"pin": ' + str(gAddr[1]) + '},'
                             eventItem = eventItem[:len(eventItem)-1]
-                            eventItem +='],"actiontype": ' + str(pevent["itemType"]) + ',"dzone": ' + str(int(pevent["dzone"] * event["minmax"][1])) + ',"mod": ' + str(event["minmax"][1]) + '},'
+                            eventItem +='],"actionType": ' + str(pevent["itemType"]) + ',"dzone": ' + str(int(pevent["dzone"] * event["minmax"][1])) + ',"mod": ' + str(event["minmax"][1]) + '},'
                             eventSet += eventItem
 #                        else:
 #                            print("EI:", event["index"],"PEI:", nIndex)
