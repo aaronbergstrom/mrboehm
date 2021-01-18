@@ -641,7 +641,7 @@ class GameController:
         eventSet += eventList
         eventSet += '"}'
 #        eventSet += "}"
-#        print(eventSet)
+        print(eventSet)
 
         self.events = json.loads(eventSet)
 #        await asyncio.sleep(0.001)
