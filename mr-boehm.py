@@ -315,6 +315,9 @@ class GameController:
     def getAddresses(self, chip):
         return self.addresses[chip]
     
+#    async def dacChipsUpdate(self):
+#    async def tcaChipUpdate(self):
+    
     async def buttonUpdate(self, port, chip, byte):
         self.bus.write_byte(0x70, port)
         self.bus.write_byte(chip,byte)
