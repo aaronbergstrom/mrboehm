@@ -411,33 +411,53 @@ class GameController:
 
                     #Set the multiplexer to the correct channel
                     tbus = evInfo["bus"]
+                    print("1")
                     self.bus.write_byte(0x70, tbus)
+                    print("2")
                     
                     actionType = evInfo["actiontype"]
+                    print("3")
                     if actiontype == 0:
+                        print("4")
                         uPort = 0x06
+                        print("5")
                         cIdx = 0
+                        print("6")
                         pin = evInfo["inputs"][0]["pin"]
+                        print("7")
                         pBit = 1
+                        print("8")
                         
                         print("Event Code: " + event.code + ", Event Value: " + event.value+". Button Action Type Called.\n")
                         
                         if pin > 8:
+                            print("9")
                             uPort = 0x07
+                            print("10")
                             pin = pin-8
+                            print("11")
                             cIdx = 1
+                            print("12")
                         pBit = pBit << (pin-1)
+                            print("13")
                         
                         pCur = self.bus.read_i2c_block_data(gpioc, uPort, 2)
+                        print("14")
                         if event.value == 1:
+                            print("15")
                             # Change the read from the GPIO pin so that the pin is set to
                             # to input once the byte has been written back to the GPIO
                             pCur[cIdx] = pCur[cIdx] | pBit
+                            print("16")
                         else:
                             # Change the read from the GPIO pin so that the pin is set to
                             # to output once the byte has been written back to the GPIO
+                            print("17")
                             pCur[cIdx] = pCur[cIdx] ^ pBit
+                            print("18")
+                        print("19")
                         self.bus.write_i2c_block_data(gpioc, uPort, pCur)
+                        print("20")
                 else:
                     print("Event Code: " + str(event.code) + ", Event Value: " + str(event.value) + ", not found in elist.\n")
             else:
