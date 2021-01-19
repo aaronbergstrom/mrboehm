@@ -145,7 +145,7 @@ logitechd = 2
 ctypes1.append(logi1p1)
 ctypes2.append(logi1p2)
 
-bus=smbus.SMBus(1)
+bus=smbus2.SMBus(1)
 #bus.write_byte_data(address,0x04,action)
 #bus.write_byte_data(0x2C,0x80,floorOne)
 
