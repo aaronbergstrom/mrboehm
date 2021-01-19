@@ -34,7 +34,7 @@ from os import path
 import sys
 import subprocess
 import asyncio
-import smbus
+import smbus2
 import json
 import copy
 import math
@@ -407,7 +407,7 @@ class GameController:
                 checkCode = "-"+str(event.code)+"-"
                 if checkCode in self.events["elist"]:
                     evInfo = self.events[str(event.code)]
-                    print(evInfo)
+#                    print(evInfo)
 
                     #Set the multiplexer to the correct channel
                     tbus = evInfo["bus"]
@@ -1116,11 +1116,11 @@ def setTemplateDefaults():
                         #GPIO chip
                         #Set Ports 0 (pins 4-11) and 1 (pins 13-20) to 0 voltz
                         gpioc = chip["addr"]
-                        bus.write_i2c_block_data(gpioc, 0x02, [0x00,0x00])
+#                        bus.write_i2c_block_data(gpioc, 0x02, [0x00,0x00])
 #                       bus.write_i2c_block_data(gpioc, 0x03, [0x00,0x00])
                         
                         #Set Ports 0 and 1 to output
-                        bus.write_i2c_block_data(gpioc, 0x06, [0x00,0x00])
+#                        bus.write_i2c_block_data(gpioc, 0x06, [0x00,0x00])
 #                        bus.write_i2c_block_data(gpioc, 0x07, [0x00,0x00])
                         
                 #Turn the power output for this dac backon.        
