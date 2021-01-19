@@ -430,7 +430,7 @@ class GameController:
                             print("15")
                             # Change the read from the GPIO pin so that the pin is set to
                             # to input once the byte has been written back to the GPIO
-                            pCur[cIdx] = pCur[cIdx] | pBit
+                            pCur[cIdx] = pCur[cIdx] ^ pBit
                             bus.write_i2c_block_data(0x48,0x01,[0x00, pCur[0]])
                             bus.write_i2c_block_data(0x49,0x01,[0x00, pCur[1]])
 
