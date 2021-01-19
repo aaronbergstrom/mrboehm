@@ -411,10 +411,18 @@ class GameController:
                     self.bus.write_byte(0x70, tbus)
                     
                     print("Pre Byte Check")
-                    lowerByte = self.bus.read_i2c_block_data(0x48,0x01,1)
-                    print("LByte: "+str(lowerByte))
-                    upperByte = self.bus.read_i2c_block_data(0x49,0x01,1)
-                    print("UByte: "+str(upperByte))
+                    try:
+                        lowerByte = self.bus.read_i2c_block_data(0x48,0x01,1)
+                        print("LByte: "+str(lowerByte))
+                    except: # catch *all* exceptions
+                        e = sys.exc_info()[0]
+                        print( "<p>Error: %s</p>" % e )
+                    try:
+                        upperByte = self.bus.read_i2c_block_data(0x49,0x01,1)
+                        print("UByte: "+str(upperByte))
+                    except: # catch *all* exceptions
+                        e = sys.exc_info()[0]
+                        print( "<p>Error: %s</p>" % e )
                     
                     
                     actionType = evInfo["actionType"]
