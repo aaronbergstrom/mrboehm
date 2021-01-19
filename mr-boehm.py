@@ -420,18 +420,10 @@ class GameController:
                         pin = evInfo["inputs"][0]["pin"]
                         pBit = 1
                         
-                        print("Event Code: " + str(event.code) + ", Event Value: " + str(event.value) + ". Button Action Type Called.\n")
-                        
                         if pin > 8:
-                            print("9")
-                            uPort = 0x07
-                            print("10")
                             pin = pin-8
-                            print("11")
                             cIdx = 1
-                            print("12")
                         pBit = pBit << (pin-1)
-                        print("13")
                         
                         pCur = self.bus.read_i2c_block_data(gpioc, uPort, 2)
                         print("14")
