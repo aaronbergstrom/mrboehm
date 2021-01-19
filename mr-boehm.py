@@ -430,20 +430,20 @@ class GameController:
                             print("15")
                             # Change the read from the GPIO pin so that the pin is set to
                             # to input once the byte has been written back to the GPIO
-                            pCur[cIdx] = pCur[cIdx] | pBit
-                            bus.write_i2c_block_data(0x48,0x01,[0x00, pCur[0]])
-                            bus.write_i2c_block_data(0x49,0x01,[0x00, pCur[1]])
+#                           pCur[cIdx] = pCur[cIdx] | pBit
+                            bus.write_i2c_block_data(0x48,0x01,[0x00, 0x10])
+#                            bus.write_i2c_block_data(0x49,0x01,[0x00, 0x00])
 
-                            self.ports[pIdx] = pCur
+#                            self.ports[pIdx] = pCur
                         else:
                             # Change the read from the GPIO pin so that the pin is set to
                             # to output once the byte has been written back to the GPIO
                             print("17")
-                            pCur[cIdx] = pCur[cIdx] ^ pBit
-                            bus.write_i2c_block_data(0x48,0x01,[0x00, pCur[0]])
-                            bus.write_i2c_block_data(0x48,0x01,[0x00, pCur[1]])
+ #                           pCur[cIdx] = pCur[cIdx] ^ pBit
+                            bus.write_i2c_block_data(0x48,0x01,[0xFF, 0xFF])
+ #                           bus.write_i2c_block_data(0x48,0x01,[0xFF, 0xFF])
                             
-                            self.ports[pIdx] = pCur
+ #                           self.ports[pIdx] = pCur
                         print("20")
                 else:
                     print("Event Code: " + str(event.code) + ", Event Value: " + str(event.value) + ", not found in elist.\n")
