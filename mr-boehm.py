@@ -280,6 +280,7 @@ class GameController:
         self.lock = [False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False]
         self.updateConSupport(conSupport)
         self.tasks = [asyncio.ensure_future(self.processEvent())]
+        self.ports = [[0x00,0x00],[0x00,0x00],[0x00,0x00],[0x00,0x00]]
         print("Created:", self.device.name)
 
 #        async for event in device.async_read_loop():
@@ -410,24 +411,9 @@ class GameController:
                     tbus = evInfo["bus"]
                     self.bus.write_byte(0x70, tbus)
                     
-                    print("Pre Byte Check")
-                    try:
-                        lowerByte = self.bus.read_i2c_block_data(0x48,0x01,2)
-                        print("LByte: "+str(lowerByte[0]))
-                    except: # catch *all* exceptions
-                        e = sys.exc_info()[0]
-                        print( "Error: %s" % e )
-                    try:
-                        upperByte = self.bus.read_i2c_block_data(0x49,0x01,2)
-                        print("UByte: "+str(upperByte[0]))
-                    except: # catch *all* exceptions
-                        e = sys.exc_info()[0]
-                        print( "Error: %s" % e )
-                    
-                    
                     actionType = evInfo["actionType"]
                     if actionType == 0:
-                        uPort = 0x06
+                        pIdx = tbus // 2
                         cIdx = 0
                         pin = evInfo["inputs"][0]["pin"]
                         pBit = 1
@@ -437,22 +423,30 @@ class GameController:
                             cIdx = 1
                         pBit = pBit << (pin-1)
                         
-                        pCur = self.bus.read_i2c_block_data(gpioc, uPort, 2)
+                        pCur = self.ports[pIdx]
+
                         print("14")
                         if event.value == 1:
                             print("15")
                             # Change the read from the GPIO pin so that the pin is set to
                             # to input once the byte has been written back to the GPIO
                             pCur[cIdx] = pCur[cIdx] | pBit
-                            print("16")
+                            bus.write_i2c_block_data(0x48,0x01,[0x00, pCur[0]])
+                            bus.write_i2c_block_data(0x49,0x01,[0x00, pCur[1]])
+
+                            self.ports[pIdx] = pCur
                         else:
                             # Change the read from the GPIO pin so that the pin is set to
                             # to output once the byte has been written back to the GPIO
                             print("17")
                             pCur[cIdx] = pCur[cIdx] ^ pBit
-                            print("18")
-                        print("19")
-                        self.bus.write_i2c_block_data(gpioc, uPort, pCur)
+                            oCur = [0x00,0x00]
+                            oCur[0] = ~ pCur[0]
+                            oCur[1] = ~ pCur[1]
+                            bus.write_i2c_block_data(0x48,0x01,[0xFF, oCur[0]])
+                            bus.write_i2c_block_data(0x48,0x01,[0xFF, oCur[1]])
+                            
+                            self.ports[pIdx] = pCur
                         print("20")
                 else:
                     print("Event Code: " + str(event.code) + ", Event Value: " + str(event.value) + ", not found in elist.\n")
@@ -1137,13 +1131,13 @@ def setTemplateDefaults():
 #                        bus.write_i2c_block_data(gpioc, 0x07, [0x00,0x00])
                         
                 #Turn the power output for this dac backon.
-                dac1Val = int(str(0) + str(0) + str(0) + str(0) + str(0) + str(1) + str(0) + str(1), 2)
+#                dac1Val = int(str(0) + str(0) + str(0) + str(0) + str(0) + str(1) + str(0) + str(1), 2)
                 #print(str(hex(dac1Val)))
-                dac2Val = int(str(0) + str(0) + str(0) + str(0) + str(0) + str(1) + str(1) + str(1), 2)
+#                dac2Val = int(str(0) + str(0) + str(0) + str(0) + str(0) + str(1) + str(1) + str(1), 2)
                 #print(str(hex(dac2Val)))
 #                bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
-                bus.write_i2c_block_data(0x48,0x01,[0x00, dac1Val])
-                bus.write_i2c_block_data(0x49,0x01,[0x00, dac2Val])
+#                bus.write_i2c_block_data(0x48,0x01,[0x00, dac1Val])
+#                bus.write_i2c_block_data(0x49,0x01,[0x00, dac2Val])
                 
 #################################################################################
 #               Old code for first iteration of the project.
