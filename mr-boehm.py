@@ -280,7 +280,10 @@ class GameController:
         self.lock = [False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False]
         self.updateConSupport(conSupport)
         self.tasks = [asyncio.ensure_future(self.processEvent())]
-        self.ports = [[0x00,0x00],[0x00,0x00],[0x00,0x00],[0x00,0x00]]
+        self.ports = [[[[1],[1],[1],[1],[1],[1],[1],[1]],[[1],[1],[1],[1],[1],[1],[1],[1]]],
+                      [[[1],[1],[1],[1],[1],[1],[1],[1]],[[1],[1],[1],[1],[1],[1],[1],[1]]],
+                      [[[1],[1],[1],[1],[1],[1],[1],[1]],[[1],[1],[1],[1],[1],[1],[1],[1]]],
+                      [[[1],[1],[1],[1],[1],[1],[1],[1]],[[1],[1],[1],[1],[1],[1],[1],[1]]]]
         print("Created:", self.device.name)
 
 #        async for event in device.async_read_loop():
@@ -416,12 +419,10 @@ class GameController:
                         pIdx = tbus // 2
                         cIdx = 0
                         pin = evInfo["inputs"][0]["pin"]
-                        pBit = 1
                         
                         if pin > 8:
                             pin = pin-8
                             cIdx = 1
-                        pBit = pBit << (pin-1)
                         
                         pCur = self.ports[pIdx]
 
@@ -430,11 +431,11 @@ class GameController:
                             print("15")
                             # Change the read from the GPIO pin so that the pin is set to
                             # to input once the byte has been written back to the GPIO
-#                           pCur[cIdx] = pCur[cIdx] | pBit
+                            self.ports[pIdx][cIdx][pin-1] = 0
 
-                            value = int(str(1) + str(1) + str(0) + str(1) + str(1) + str(1) + str(1) + str(1), 2)
+                            value = int(str(self.ports[pIdx][cIdx][7]) + str(self.ports[pIdx][cIdx][6]) + str(self.ports[pIdx][cIdx][5]) + str(self.ports[pIdx][cIdx][4]) + str(self.ports[pIdx][cIdx][3]) + str(self.ports[pIdx][cIdx][2]) + str(self.ports[pIdx][cIdx][1]) + str(self.ports[pIdx][cIdx][0]), 2)
 
-                            bus.write_i2c_block_data(0x48,0x01,[0x00, value])
+                            bus.write_i2c_block_data(0x48+cIdx,0x01,[0x00, value])
 #                            bus.write_i2c_block_data(0x49,0x01,[0x00, 0x00])
 
 #                            self.ports[pIdx] = pCur
@@ -443,7 +444,11 @@ class GameController:
                             # to output once the byte has been written back to the GPIO
                             print("17")
  #                           pCur[cIdx] = pCur[cIdx] ^ pBit
-                            bus.write_i2c_block_data(0x48,0x01,[0xFF, 0xFF])
+                            self.ports[pIdx][cIdx][pin-1] = 1
+                            
+                            value = int(str(self.ports[pIdx][cIdx][7]) + str(self.ports[pIdx][cIdx][6]) + str(self.ports[pIdx][cIdx][5]) + str(self.ports[pIdx][cIdx][4]) + str(self.ports[pIdx][cIdx][3]) + str(self.ports[pIdx][cIdx][2]) + str(self.ports[pIdx][cIdx][1]) + str(self.ports[pIdx][cIdx][0]), 2)
+
+                            bus.write_i2c_block_data(0x48+cIdx,0x01,[0xFF, value])
  #                           bus.write_i2c_block_data(0x48,0x01,[0xFF, 0xFF])
                             
  #                           self.ports[pIdx] = pCur
