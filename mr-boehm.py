@@ -1108,7 +1108,8 @@ def setTemplateDefaults():
                         i=0
                         for pin in dac_pins:
                             qt = chip["volt"][i] // 16
-                            rm = (chip["volt"][i] % 16 * 16)
+                            rm = chip["volt"][i] % 16
+                            rm = rm * 16
                             bus.write_i2c_block_data(chip["addr"],pin,[qt,rm])
                             i = i+1
                             
