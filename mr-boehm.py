@@ -1126,9 +1126,9 @@ def setTemplateDefaults():
                         
                 #Turn the power output for this dac backon.
                 dac1Val = int(str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(0), 2)
-                hex(dac1Val)
+                print(str(hex(dac1Val)))
                 dac2Val = int(str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(1), 2)
-                hex(dac2Val)
+                print(str(hex(dac2Val)))
 #                bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
                 bus.write_i2c_block_data(0x48,0x01,[dac1Val,dac1Val])
                 bus.write_i2c_block_data(0x49,0x01,[dac2Val,dac2Val])
