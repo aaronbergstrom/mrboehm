@@ -1124,8 +1124,12 @@ def setTemplateDefaults():
 #                        bus.write_i2c_block_data(gpioc, 0x06, [0x00,0x00])
 #                        bus.write_i2c_block_data(gpioc, 0x07, [0x00,0x00])
                         
-                #Turn the power output for this dac backon.        
-                bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
+                #Turn the power output for this dac backon.
+                dac1Val = int(str(1) + str(1) + str(1) + str(1) + str(1) + str(0) + str(1) + str(1), 2)
+                dav2Val = int(str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(1), 2)
+#                bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
+                bus.write_i2c_block_data(0x48,0x01,[dac1Val,dac1Val])
+                bus.write_i2c_block_data(0x49,0x01,[dac2Val,dac2Val])
                 
 #################################################################################
 #               Old code for first iteration of the project.
