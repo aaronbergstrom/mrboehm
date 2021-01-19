@@ -1130,8 +1130,8 @@ def setTemplateDefaults():
                 dac2Val = int(str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(1), 2)
                 print(str(hex(dac2Val)))
 #                bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
-                bus.write_i2c_block_data(0x48,0x01,[0x00,dac1Val])
-                bus.write_i2c_block_data(0x49,0x01,[0x00,dac2Val])
+                bus.write_i2c_block_data(0x48,0x01,[dac1Val, 0x00])
+                bus.write_i2c_block_data(0x49,0x01,[dac2Val, 0x00])
                 
 #################################################################################
 #               Old code for first iteration of the project.
