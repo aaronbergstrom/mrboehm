@@ -399,19 +399,23 @@ class GameController:
 #    Pot 2
 
     async def processEvent(self):
-        print("pE")
         async for event in self.device.async_read_loop():
-            print("Pe2")
             if self.bus != None and (event.type == ecodes.EV_ABS or event.type == ecodes.EV_KEY):
                 ### Not sure what self.events["elist"] does
                 checkCode = "-"+str(event.code)+"-"
                 if checkCode in self.events["elist"]:
                     evInfo = self.events[str(event.code)]
-#                    print(evInfo)
 
                     #Set the multiplexer to the correct channel
                     tbus = evInfo["bus"]
                     self.bus.write_byte(0x70, tbus)
+                    
+                    print("Pre Byte Check")
+                    lowerByte = self.bus.read_i2c_block_data(0x48,0x01,1)
+                    print("LByte: "+str(lowerByte))
+                    upperByte = self.bus.read_i2c_block_data(0x49,0x01,1)
+                    print("UByte: "+str(upperByte))
+                    
                     
                     actionType = evInfo["actionType"]
                     if actionType == 0:
@@ -1125,10 +1129,10 @@ def setTemplateDefaults():
 #                        bus.write_i2c_block_data(gpioc, 0x07, [0x00,0x00])
                         
                 #Turn the power output for this dac backon.
-                dac1Val = int(str(1) + str(0) + str(1) + str(1) + str(1) + str(0) + str(0) + str(1), 2)
-                print(str(hex(dac1Val)))
-                dac2Val = int(str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(1) + str(0), 2)
-                print(str(hex(dac2Val)))
+                dac1Val = int(str(0) + str(0) + str(0) + str(0) + str(0) + str(1) + str(0) + str(1), 2)
+                #print(str(hex(dac1Val)))
+                dac2Val = int(str(0) + str(0) + str(0) + str(0) + str(0) + str(1) + str(1) + str(1), 2)
+                #print(str(hex(dac2Val)))
 #                bus.write_i2c_block_data(jdac,0x01,[0x00,0x00])
                 bus.write_i2c_block_data(0x48,0x01,[0x00, dac1Val])
                 bus.write_i2c_block_data(0x49,0x01,[0x00, dac2Val])
